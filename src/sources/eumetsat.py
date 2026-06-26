@@ -16,19 +16,17 @@ import xarray as xr
 import eumdac
 from pyproj import CRS, Transformer
 
-from config import (
-    EUMETSAT_CONSUMER_KEY,
-    EUMETSAT_CONSUMER_SECRET,
-    EUM_COLLECTION,
-)
+from config import EUM_COLLECTION
 
 
 def get_datastore():
     """Authenticate with EUMETSAT and return a DataStore instance."""
-    if not EUMETSAT_CONSUMER_KEY or not EUMETSAT_CONSUMER_SECRET:
+    key = os.environ.get("EUMETSAT_CONSUMER_KEY", "")
+    secret = os.environ.get("EUMETSAT_CONSUMER_SECRET", "")
+    if not key or not secret:
         raise ValueError("Missing EUMETSAT credentials in .env")
 
-    token = eumdac.AccessToken((EUMETSAT_CONSUMER_KEY, EUMETSAT_CONSUMER_SECRET))
+    token = eumdac.AccessToken((key, secret))
     return eumdac.DataStore(token)
 
 
