@@ -9,12 +9,7 @@ from datetime import datetime, timezone
 import pandas as pd
 import requests
 
-from config import (
-    TELERIVET_API_KEY,
-    TELERIVET_PROJECT_ID,
-    TELERIVET_GROUP_ID,
-    OUTPUT_DIR,
-)
+from config import OUTPUT_DIR
 from src.core.database import (
     forester_already_sent,
     forester_mark_sent,
@@ -69,6 +64,9 @@ def format_no_fire_message():
 
 def send_to_telerivet_group(message_text: str):
     """Send an SMS broadcast to the configured Telerivet group."""
+    TELERIVET_API_KEY = os.environ.get("TELERIVET_API_KEY", "")
+    TELERIVET_PROJECT_ID = os.environ.get("TELERIVET_PROJECT_ID", "")
+    TELERIVET_GROUP_ID = os.environ.get("TELERIVET_GROUP_ID", "")
     url = f"https://api.telerivet.com/v1/projects/{TELERIVET_PROJECT_ID}/send_broadcast"
     response = requests.post(
         url,
@@ -109,6 +107,9 @@ def send_message(message_text: str):
 
 def process_forester_alerts():
     """Main workflow to read the ranked alerts and send SMS notifications."""
+    TELERIVET_API_KEY = os.environ.get("TELERIVET_API_KEY", "")
+    TELERIVET_PROJECT_ID = os.environ.get("TELERIVET_PROJECT_ID", "")
+    TELERIVET_GROUP_ID = os.environ.get("TELERIVET_GROUP_ID", "")
     if not TELERIVET_API_KEY or not TELERIVET_PROJECT_ID or not TELERIVET_GROUP_ID:
         print("Warning: Telerivet API settings missing in .env. Skipping SMS.")
         return
