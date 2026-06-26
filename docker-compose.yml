@@ -2,7 +2,7 @@ services:
   backend:
     build: .
     ports:
-      - "8000:8000"
+      - "8001:8000"
     volumes:
       - fire_output:/app/output
       - fire_db:/app/src
@@ -35,7 +35,7 @@ services:
       args:
         # Set this to your server's IP/hostname when deploying
         # e.g. NEXT_PUBLIC_API_URL=http://192.168.1.100:8000
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8001}
     ports:
       - "3000:3000"
     depends_on:
