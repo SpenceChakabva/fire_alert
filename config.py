@@ -2,7 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=False)  # OS env vars (injected by Docker) take priority over .env file
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
