@@ -1,0 +1,48 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - fire_output:/app/output
+      - fire_db:/app/src
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  pipeline:
+    build: .
+    command: python main.py
+    volumes:
+      - fire_output:/app/output
+      - fire_db:/app/src
+    env_file:
+      - .env
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./ui
+      args:
+        # Set this to your server's IP/hostname when deploying
+        # e.g. NEXT_PUBLIC_API_URL=http://192.168.1.100:8000
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  fire_output:
+  fire_db:

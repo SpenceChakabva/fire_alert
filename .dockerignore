@@ -1,0 +1,14 @@
+__pycache__
+*.pyc
+*.pyo
+.env
+.env.*
+ui/node_modules
+ui/.next
+output/
+src/alerts.db
+*.db
+final_fire_monitoring_demo.py
+start_local.ps1
+implementation_plan.md
+.git

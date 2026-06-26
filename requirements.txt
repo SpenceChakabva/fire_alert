@@ -1,0 +1,12 @@
+pandas
+geopandas
+xarray
+eumdac
+requests
+twilio
+fastapi
+uvicorn
+python-dotenv
+pyproj
+netCDF4
+h5netcdf

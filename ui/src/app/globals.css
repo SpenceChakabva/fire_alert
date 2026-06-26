@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ── Organic GIS Palette ── */
+:root {
+  --bg-base:        #0a110d;
+  --bg-surface:     #101a12;
+  --bg-elevated:    #182318;
+  --bg-card:        #1c2b1e;
+  --border:         rgba(255,255,255,0.07);
+  --border-hover:   rgba(255,255,255,0.14);
+
+  /* accent */
+  --forest:         #2d6a4f;
+  --forest-light:   #52b788;
+  --forest-glow:    rgba(82,183,136,0.12);
+  --amber:          #d4a017;
+  --amber-light:    #f5c842;
+  --amber-glow:     rgba(213,160,23,0.15);
+
+  /* risk */
+  --risk-high:      #e05c3a;
+  --risk-high-bg:   rgba(224,92,58,0.12);
+  --risk-medium:    #d4a017;
+  --risk-medium-bg: rgba(212,160,23,0.12);
+  --risk-low:       #52b788;
+  --risk-low-bg:    rgba(82,183,136,0.12);
+
+  /* text */
+  --text-primary:   #e8f0e9;
+  --text-secondary: #8aab8e;
+  --text-muted:     #4a6550;
+
+  /* sidebar */
+  --sidebar-w: 220px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Leaflet dark overrides ── */
+.leaflet-container {
+  background: #0a110d !important;
+  font-family: inherit !important;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-hover);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5) !important;
+}
+.leaflet-popup-content { margin: 12px !important; }
+.leaflet-popup-close-button { color: var(--text-secondary) !important; }
+.leaflet-popup-close-button:hover { color: var(--text-primary) !important; }
+.leaflet-control-zoom a {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+.leaflet-control-zoom a:hover { background: var(--bg-card) !important; }
+.leaflet-control-attribution {
+  background: rgba(10,17,13,0.7) !important;
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+}
+.leaflet-control-attribution a { color: var(--forest-light) !important; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--forest); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--forest-light); }
+
+/* ── Utility ── */
+.glass {
+  background: rgba(24, 35, 24, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
