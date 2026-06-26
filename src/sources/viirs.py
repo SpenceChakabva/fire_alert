@@ -5,12 +5,11 @@ for VIIRS sensors (NOAA-21, NOAA-20, Suomi NPP).
 """
 
 import io
+import os
 from datetime import datetime, timezone
 
 import pandas as pd
 import requests
-
-from config import FIRMS_MAP_KEY
 
 
 def fetch_firms_viirs():
@@ -19,6 +18,7 @@ def fetch_firms_viirs():
     Queries multiple VIIRS datasets and combines results,
     filtered to the Southern Africa region.
     """
+    FIRMS_MAP_KEY = os.environ.get("FIRMS_MAP_KEY", "")
     if not FIRMS_MAP_KEY:
         raise ValueError("Missing FIRMS_MAP_KEY in .env")
 
